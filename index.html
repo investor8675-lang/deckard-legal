@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DECKARD</title>
+<meta name="description" content="Built to replace every face rating app. Coming to iPhone.">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DECKARD">
+<meta property="og:description" content="Built to replace every face rating app. Coming to iPhone.">
+<meta property="og:url" content="https://usedeckard.com/">
+<meta property="og:image" content="https://usedeckard.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://qlsidnowsqpfovdvyhog.supabase.co" crossorigin>
+<link rel="preload" as="image" href="img/macro.webp" fetchpriority="high">
+<link rel="stylesheet" href="site.css?v=57">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<!-- usedeckard.com, the prelaunch page (Jaume, 2026-10-09: the redesign's C,
+     "and remove the true scan part. that would be perfect"): the name,
+     "Coming to iPhone.", the close-up off the edge, "Built to replace every
+     face rating app.", the email box. The long page that was here is kept for
+     after the launch: git tag website-full-2026-10-09. -->
+<main>
+  <div class="pic" aria-hidden="true">
+    <img class="macro" src="img/macro.webp" alt="" width="1440" height="2560" fetchpriority="high">
+  </div>
+  <div class="col">
+    <header class="brand">
+      <h1 class="wordmark mark">DECKARD</h1>
+      <p class="sub">Coming to iPhone.</p>
+    </header>
+    <div class="ask">
+      <h2 class="headline line">Built to replace every face rating&nbsp;app.</h2>
+      <p class="count-line" id="waiting" hidden><span class="num" id="waiting-n"></span> people are waiting.</p>
+      <form class="signup" id="signup" novalidate>
+        <label class="sr" for="email">Email</label>
+        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="Your email" required>
+        <input class="trap" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit">Join</button>
+      </form>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+      <p class="consent">One email to confirm, one when we launch. <a href="https://usedeckard.com/privacy/">Privacy</a></p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="in">
+    <span>© 2026 DECKARD</span>
+    <nav aria-label="Legal">
+      <a href="https://usedeckard.com/privacy/">Privacy</a>
+      <a href="https://usedeckard.com/terms/">Terms</a>
+      <a href="mailto:support@usedeckard.com">support@usedeckard.com</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+  <div class="sheet-in">
+    <h2 class="headline" id="sheet-title"></h2>
+    <p class="sheet-line" id="sheet-line"></p>
+    <div class="sheet-actions">
+      <button type="button" id="sheet-go" hidden></button>
+      <button type="button" id="sheet-close" class="quiet">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="site.js?v=54"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+/* DECKARD — usedeckard.com, the prelaunch page (2026-10-09, his pick C of the
+   redesign, with its second line taken out): the name, "Coming to iPhone.",
+   the close-up off the edge, "Built to replace every face rating app.", the
+   email box. Nothing is drawn on top of anything: the close-up has its own
+   band on a phone, its own column on a laptop. Only transform and opacity
+   animate, once, on arrival. */
+:root {
+  --night: #000000;
+  --ink: #f5f5f7;
+  --ink-2: #a1a1a6;
+  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --gutter: clamp(16px, 4.4vw, 64px);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--night); }
+body { margin: 0; background: var(--night); color: var(--ink); font: 17px/1.47 var(--text); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: clip; }
+img { display: block; -webkit-user-drag: none; user-select: none; }
+h1, h2, p { margin: 0; }
+a { color: inherit; }
+button, input { font: inherit; color: inherit; }
+::selection { background: var(--ink); color: var(--night); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.wordmark { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; line-height: 1; margin-right: -0.14em; }
+.headline { font-family: var(--display); font-weight: 700; line-height: 1; letter-spacing: -0.038em; text-wrap: balance; }
+.num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+/* -------------------------------------------------------------- layout -- */
+main {
+  min-height: 100vh; min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  padding: 0 0 0 max(var(--gutter), env(safe-area-inset-left, 0px));
+}
+.col { grid-column: 1; grid-row: 1; display: grid; grid-template-rows: auto 1fr; padding: calc(env(safe-area-inset-top, 0px) + clamp(28px, 6vh, 64px)) 0 clamp(28px, 6vh, 64px); min-width: 0; }
+.ask { align-self: center; display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; gap: clamp(18px, 3.2vh, 32px); justify-items: start; max-width: 560px; }
+.mark { font-size: clamp(26px, 2.6vw, 40px); }
+.sub { margin-top: 12px; font: 600 clamp(17px, 1.4vw, 20px)/1.2 var(--display); letter-spacing: -0.01em; color: var(--ink-2); }
+.line { font-size: clamp(40px, min(5vw, 9vh), 80px); }
+.count-line { font: 600 clamp(19px, 1.7vw, 24px)/1.2 var(--display); letter-spacing: -0.015em; color: var(--ink-2); }
+
+.pic { grid-column: 2; grid-row: 1; position: relative; min-width: 0; overflow: hidden; }
+/* the crop runs from the eye to the chin: the jawline whole (his note, 2026-10-09: "we need to be able to see the jawline") */
+.macro { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 72%; }
+/* the close-up meets the black on a thin edge only, toward the words and at
+   its foot, so it never ends on a straight line above the footer ("it cuts
+   the face directly, and it makes it look cheap") and the face itself is not
+   dimmed ("you faded the face too quickly", both 2026-10-09) */
+.pic::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.4) 7%, rgba(0, 0, 0, 0) 18%), linear-gradient(rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0.45) 96%, #000 100%); pointer-events: none; }
+
+.signup { display: flex; gap: 10px; width: min(100%, 480px); padding: 6px; border-radius: 999px; background: #1c1c1e; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); transition: box-shadow 0.3s var(--ease); }
+.signup:focus-within { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.6); }
+.signup input[type="email"] { flex: 1 1 0; min-width: 0; width: 0; border: 0; background: transparent; padding: 0 18px; font-size: 19px; outline: none; color: #fff; }
+.signup input::placeholder { color: rgba(255, 255, 255, 0.5); }
+.signup button { flex: none; border: 0; border-radius: 999px; background: #fff; color: #000; font-weight: 600; font-size: 17px; padding: 15px 28px; cursor: pointer; transition: transform 0.2s var(--ease), opacity 0.2s; }
+.signup button:active { transform: scale(0.97); }
+.signup button:disabled { opacity: 0.6; cursor: default; }
+.signup.done { display: none; }
+.trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.status:empty { display: none; }
+.status { font: 600 clamp(20px, 2vw, 26px)/1.3 var(--display); letter-spacing: -0.015em; }
+.consent { font: 400 17px/1.45 var(--text); color: var(--ink); }
+.consent a { text-underline-offset: 3px; }
+
+footer { background: var(--night); color: var(--ink); padding: clamp(28px, 6vh, 64px) var(--gutter) calc(env(safe-area-inset-bottom, 0px) + 40px); }
+footer .in { padding-top: 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px 32px; font: 500 15px/1.4 var(--text); }
+footer nav { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+footer a { text-decoration: none; }
+footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.sheet { position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, 0.94); color: #fff; display: grid; place-items: center; padding: var(--gutter); opacity: 0; transition: opacity 0.5s var(--ease); }
+.sheet.in { opacity: 1; }
+.sheet[hidden] { display: none; }
+.sheet-in { display: grid; gap: 22px; justify-items: center; text-align: center; max-width: 640px; transform: translateY(18px); transition: transform 0.7s var(--ease); }
+.sheet.in .sheet-in { transform: none; }
+.sheet-in:focus { outline: none; }
+.sheet .headline { font-size: clamp(40px, min(5.6vw, 10vh), 92px); }
+.sheet-line { font: 600 clamp(22px, 2.4vw, 30px)/1.25 var(--display); letter-spacing: -0.02em; }
+.sheet-actions { display: flex; gap: 12px; margin-top: 10px; }
+.sheet button { border: 0; border-radius: 999px; background: #fff; color: #000; font-weight: 600; font-size: 17px; padding: 15px 28px; cursor: pointer; }
+.sheet button.quiet { background: #1c1c1e; color: #fff; }
+.sheet button:focus-visible, .signup button:focus-visible, .consent a:focus-visible, footer a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+body.locked { overflow: hidden; }
+
+/* -------------------------------------------------------------- arrival -- */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes push { from { opacity: 0; transform: scale(1.12); } to { opacity: 1; transform: scale(1.03); } }
+html.js .macro { animation: push 3.6s var(--ease) both 0.1s; transform-origin: 62% 72%; }
+html.js .brand > * { animation: rise 1.6s var(--ease) backwards; }
+html.js .mark { animation-delay: 0.35s; }
+html.js .sub { animation-delay: 0.6s; }
+html.js .ask > * { animation: rise 1.6s var(--ease) backwards; }
+html.js .ask > :nth-child(1) { animation-delay: 0.8s; }
+html.js .ask > :nth-child(n + 2) { animation-delay: 1.1s; }
+
+/* --------------------------------------------------------------- phone -- */
+/* Upright phones and upright tablets stack: the name, the picture in its own
+   band, the words and the email box under it. A phone turned sideways
+   keeps the laptop's two columns (measured 2026-10-09: stacked, the email
+   box ran off a 667 x 375 screen). */
+@media (orientation: portrait) and (max-width: 1100px) {
+  main {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    height: 100vh; height: 100svh; min-height: 560px;
+    padding: calc(env(safe-area-inset-top, 0px) + 24px) var(--gutter) calc(env(safe-area-inset-bottom, 0px) + 22px);
+  }
+  .col { display: contents; }
+  .brand { grid-row: 1; text-align: center; }
+  .pic { grid-column: 1; grid-row: 2; margin: 12px calc(-1 * var(--gutter)) 0; }
+  .ask { grid-column: 1; grid-row: 3; justify-self: center; width: min(100%, 560px); justify-items: stretch; text-align: center; gap: 16px; max-width: none; padding-top: clamp(16px, 3.2vw, 36px); }
+  .mark { font-size: clamp(30px, 5vw, 44px); }
+  .sub { margin-top: 10px; font-size: clamp(17px, 2.4vw, 22px); }
+  .line { font-size: clamp(34px, 10vw, 60px); }
+  .macro { object-position: 64% 76%; }
+  /* the band meets the black above and below on a thin edge, never a hard one */
+  .pic::after { background: linear-gradient(#000 0%, rgba(0, 0, 0, 0.45) 4%, rgba(0, 0, 0, 0) 11%, rgba(0, 0, 0, 0) 89%, rgba(0, 0, 0, 0.45) 96%, #000 100%); }
+  .signup { width: 100%; }
+  .signup input[type="email"] { font-size: 17px; padding: 0 14px; }
+  .signup button { padding: 14px 20px; }
+  .consent { font-size: 15px; }
+}
+/* a phone turned sideways: the laptop's two columns, tighter */
+@media (max-height: 500px) and (orientation: landscape) {
+  .col { padding-top: calc(env(safe-area-inset-top, 0px) + 18px); padding-bottom: 18px; }
+  .ask { gap: 12px; }
+  .line { font-size: clamp(30px, 8vh, 40px); }
+  .sub { margin-top: 6px; }
+  .consent { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .macro, html.js .brand > *, html.js .ask > * { animation: none; }
+  .sheet, .sheet-in { transition: none; }
+}
