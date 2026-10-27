@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DECKARD</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/favicon.png">
+<!-- GitHub Pages serves this for any address that does not exist; it was
+     GitHub's own grey page, drawn at desktop width on a phone (2026-10-08).
+     Paths are absolute because it answers at every depth. -->
+<style>
+  html, body { margin: 0; height: 100%; background: #000; color: #f5f5f7; }
+  body { display: grid; place-items: center; padding: 16px; box-sizing: border-box; text-align: center;
+    font: 17px/1.47 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+  main { display: grid; gap: 28px; justify-items: center; }
+  .mark { font: 800 clamp(30px, 4.4vw, 60px)/1 -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", system-ui, sans-serif;
+    letter-spacing: 0.14em; padding-left: 0.14em; text-transform: uppercase; color: #fff; margin: 0; }
+  h1 { margin: 0; font: 700 clamp(32px, 4vw, 56px)/1.05 -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", system-ui, sans-serif; letter-spacing: -0.035em; }
+  a.home { display: inline-block; border-radius: 999px; background: #fff; color: #000; font-weight: 600; padding: 15px 28px; text-decoration: none; }
+  a.home:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="mark" aria-hidden="true">DECKARD</p>
+  <h1>This page doesn’t exist.</h1>
+  <a class="home" href="/">Go to DECKARD</a>
+</main>
+<script>
+// In the language of the address (/es/…), else the browser's; the button goes
+// to that language's page (scripts/website-langs/strings.mjs names the six).
+(function () {
+  var W = {
+    es: ['es-ES', 'Esta página no existe.', 'Ir a DECKARD', '/es/'],
+    latam: ['es-419', 'Esta página no existe.', 'Ir a DECKARD', '/latam/'],
+    de: ['de', 'Diese Seite gibt es nicht.', 'Zu DECKARD', '/de/'],
+    fr: ['fr', 'Cette page n’existe pas.', 'Aller sur DECKARD', '/fr/'],
+    it: ['it', 'Questa pagina non esiste.', 'Vai su DECKARD', '/it/'],
+    br: ['pt-BR', 'Esta página não existe.', 'Ir para o DECKARD', '/br/']
+  };
+  var k = location.pathname.split('/')[1];
+  if (!W[k]) {
+    k = null;
+    var ls = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+    for (var i = 0; i < ls.length && !k; i++) {
+      var l = String(ls[i]).toLowerCase();
+      if (l.indexOf('en') === 0) break;
+      k = l.indexOf('es') === 0 ? (l === 'es' || l === 'es-es' ? 'es' : 'latam') : l.indexOf('de') === 0 ? 'de' : l.indexOf('fr') === 0 ? 'fr' : l.indexOf('it') === 0 ? 'it' : l.indexOf('pt') === 0 ? 'br' : null;
+    }
+  }
+  var w = k && W[k];
+  if (!w) return;
+  document.documentElement.lang = w[0];
+  document.querySelector('h1').textContent = w[1];
+  var a = document.querySelector('a.home');
+  a.textContent = w[2];
+  a.href = w[3];
+})();
+</script>
+</body>
+</html>
